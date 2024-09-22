@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Proportion of people who did not wear SPF30 or higher on most days, Nov 2023 - Feb 2024 ",
-  "width": 800,
-  "height": 400,
+  "width": 350,
+  "height": 350,
   "projection": {"type": "mercator"},
   "layer": [
     {
