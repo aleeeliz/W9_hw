@@ -1,0 +1,40 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Proportion of people who did not wear SPF30 or higher on most days, Nov 2023 - Feb 2024 ",
+  "width": 800,
+  "height": 400,
+  "projection": {"type": "mercator"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/aleeeliz/w9_hw/refs/heads/main/ne_10m.topojson",
+    "format": {"type": "topojson", "feature": "ne_10m_admin_1_states_provinces"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.name",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/aleeeliz/w9_hw/refs/heads/main/suncreen_data.csv"
+        },
+        "key": "state",
+        "fields": ["suncreen_prop"]
+      }
+    },
+    {"calculate": "datum.suncreen_prop", "as": "Proportion of people"}
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "Proportion of people",
+      "type": "quantitative",
+      "scale": {
+        "type": "threshold",
+        "domain": [65, 70, 72, 74],
+        "range": ["#edf8fb", "#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"]
+      }
+    },
+    "tooltip": [
+      {"field": "properties.name", "type": "nominal", "title": "State"},
+      {"field": "Proportion of people", "type": "quantitative"}
+    ]
+  }
+}
